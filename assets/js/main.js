@@ -1,8 +1,7 @@
 $(document).ready(function () {
   var category = '';
 
-  $('div.category-list > button').on('click', function(el) {
-    console.log(this.value);
+  $('div.category-list > button').on('click', function (el) {
     if (category != this.value) {
       // clear old values if value changed
       $('div#all-container, div#chart-tables').html('');
@@ -13,30 +12,35 @@ $(document).ready(function () {
   })
 });
 
-var xAxis = []
+var xAxis = [];
+
+// set date of when data was pulled from Ao3
+var pullData = moment("2018-01-01");
 
 // month data
 for (var i = 0; i < 36; i++) {
-  xAxis.push(i);
+  xAxis.push(pullData.subtract(1, 'months').format("MM/DD/YYYY"));
 }
 
+xAxis = xAxis.reverse();
+
 function getData(category) {
-  $.when($.get('timeseries/'+category+'.csv')).then(function(data) {
+  $.when($.get('timeseries/' + category + '.csv')).then(function (data) {
     var csv_data = $.csv.toArrays(data, {});
     var values = [];
     var name = '';
     var final = [];
 
-    // loop over rows
-    for (row_id = 0; row_id < csv_data.length; row_id++) {
+    // loop over rows csv_data.length
+    for (row_id = 0; row_id < 36 * 3; row_id++) {
       fandom = csv_data[row_id][1];
 
       // new fandom
       if (name != fandom) {
         if (name != '') {
-          final.push({name: name, data: values.reverse()});
+          final.push({name: name, data: values.reverse() });
 
-          createSingleChart({name: name, data: values.reverse()});
+          createSingleChart({name: name, data: values.reverse() });
         }
 
         // update fandom
@@ -46,7 +50,9 @@ function getData(category) {
 
       values.push(parseInt(csv_data[row_id][0]));
     }
-    createSingleChart({ name: name, data: values.reverse() });
+
+    // all data parsed; output main chart
+    createSingleChart({name: name, data: values.reverse()});
     createTopChart(final, category);
   });
 }
@@ -79,11 +85,12 @@ function createTopChart(series, category) {
 function createSingleChart(series) {
   var i = $('#chart-tables > div').length;
 
-  $('<div id="SingleChart'+i+'">').appendTo($('#chart-tables'));
+  $('<div id="SingleChart' + i + '">').appendTo($('#chart-tables'));
 
-  Highcharts.chart('SingleChart'+i, {
+
+  Highcharts.chart('SingleChart' + i, {
     title: {
-      text: series.name
+      text: '#' + (i+1) + ' ' + series.name
     },
     subtitle: {
       text: 'Source: archiveofourown.org'
@@ -97,9 +104,7 @@ function createSingleChart(series) {
       categories: xAxis
     },
     legend: {
-      layout: 'horizontal',
-      align: 'center',
-      verticalAlign: 'bottom'
+      enabled: false
     },
     series: [series]
   });
