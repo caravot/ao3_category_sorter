@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ao3 Fandom Data</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/images/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="./assets/css/dataTables.bootstrap.css">
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+    <script src="./assets/js/dataTables.bootstrap.js"></script>
+    <script src="./assets/js/jquery.csv.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="graph.html">Ao3 Fandom Data</a>
+        </div>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="https://github.com/caravot/ao3_category_sorter" title="Github Project Link">
+                        <img src="assets/images/GitHub-Mark-Light-32px.png" height="16" width="16">
+                        Github
+                    </a>
+                </li>
+                <li>
+                    <a href="https://github.com/caravot/ao3_category_sorter/issues" title="Submit Issue on Github">
+                        Submit Issue/Feedback
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container-fluid">
+    <h1 class="page-header">Category Data
+        <small>January 2015 - January 2018</small>
+    </h1>
+    <p>Select a category below to see the number of works submitted for the top 50 fandoms in each category over the past 36 months (3 years).</p>
+    <div class="category-list">
+        <button value="AnimeaManga" class="btn btn-default">Anime/Manga</button>
+        <button value="BooksaLiterature" class="btn btn-default">Books/Literature</button>
+        <button value="CartoonsaComicsaGraphicNovels" class="btn btn-default">Cartoons/Comics/Graphic Novels</button>
+        <button value="Movies" class="btn btn-default">Movies</button>
+        <button value="MusicaBands" class="btn btn-default">Music/Bands</button>
+        <button value="OtherMedia" class="btn btn-default">Other Media</button>
+        <button value="Theater" class="btn btn-default">Theater</button>
+        <button value="TVShows" class="btn btn-default">TV Shows</button>
+        <button value="VideoGames" class="btn btn-default">Video Games</button>
+    </div>
+</div>
+<!--<div class="container-fluid">-->
+    <!--<h1 class="page-header">Generate Metrics for a Fandom</h1>-->
+<!--</div>-->
+<!--<div class="container-fluid">-->
+    <!--<form class="form-inline">-->
+        <!--<div class="form-group">-->
+            <!--<label for="search">Fandom</label>-->
+            <!--<input type="text" class="form-control" id="search" name="search" placeholder="Fandom" autofocus>-->
+            <!--<button type="reset" class="btn btn-default btn-reset">Reset</button>-->
+        <!--</div>-->
+    <!--</form>-->
+<!--</div>-->
+<div class="container-fluid" id="all-container"></div>
+<div class="container-fluid" id="chart-tables"></div>
+</body>
+</html>

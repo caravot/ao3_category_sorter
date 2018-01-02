@@ -11,7 +11,6 @@ BASE_URL = 'archiveofourown.org'
 
 # store all works
 all_fandoms = []
-
 # loop over all ao3 fandom categories
 for category in [
     'Movies',
@@ -43,6 +42,7 @@ for category in [
     for container in containers:
         items = container.findChildren('li')
 
+        # loop over each work
         for item in items:
             title = item.a.text
             href = 'https://' + BASE_URL + item.a['href']
@@ -58,8 +58,10 @@ for category in [
             fandoms.append(row)
             all_fandoms.append(row)
 
+    # sort fandoms by count
     fandoms = sorted(fandoms, key=lambda x: int(x[1]), reverse=True)
 
+    # remove non-letters from category (such as space/dash)
     filename = re.sub(r'[^A-Za-z]', '', category)
 
     # create csv file of results
@@ -87,7 +89,6 @@ filename = re.sub(r'[^A-Za-z]', '', category)
 csvfile = open('csv/all_fandoms.csv', 'wb')
 spamwriter = csv.writer(csvfile, delimiter=',')
 spamwriter.writerows(all_fandoms)
-
 
 # write complete list to csv file
 with open('html/all_fandoms.html', 'wb') as file:
